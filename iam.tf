@@ -1,41 +1,41 @@
-
- 
-
-
-# Users are added  below
-resource "aws_iam_user" "tim" { 
-   name = "tim" 
-   path = "/" 
-} 
-resource "aws_iam_user" "ben" { 
-   name = "ben" 
-   path = "/" 
-} 
-resource "aws_iam_user" "lisa" { 
-   name = "lisa" 
-   path = "/" 
-} 
-#Adds groups 
-resource "aws_iam_group" "developers" { 
-    name = "developers" 
-    path = "/" 
-} 
-resource "aws_iam_group" "admin" { 
-    name = "admin" 
-    path = "/" 
+# Users are added below
+resource "aws_iam_user" "Tim" {
+  name = "Tim"
+  path = "/"
 }
-#Group Membership
-resource "aws_iam_group_membership" "developers_team" { 
-  name = "developers-group-membership" 
-  users = [ 
-   "${aws_iam_user.tim.name}"
-   
-    "${aws_iam_user.ben.name}"
 
-    "${aws_iam_user.lisa.name}" 
-  ] 
-  group = "${aws_iam_group.developers.name}" 
- 
+resource "aws_iam_user" "Ben" {
+  name = "Ben"
+  path = "/"
+}
+
+resource "aws_iam_user" "Lisa" {
+  name = "Lisa"
+  path = "/"
+}
+
+# adds groups
+resource "aws_iam_group" "developers" {
+  name = "developers"
+  path = "/"
+}
+
+resource "aws_iam_group" "admin" {
+  name = "admin"
+  path = "/"
+}
+
+
+# Group Memebership
+resource "aws_iam_user_membership" "developers_team" {
+  name = "developers-group-membership"
+  users = [
+    "${aws_iam_user.Tim.name}",
+    "${aws_iam_user.Ben.name}",
+    "${aws_iam_user.Lisa.name}",
+  ]
+  group = "${aws_iam_group.developers.name}"
+}
 }
 
 
